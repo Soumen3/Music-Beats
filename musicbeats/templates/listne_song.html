@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{song.name}}{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" style="padding-top:3%">
+                <img src="{% static song.image %}" alt="" srcset="" height="250px" width="350px">
+            </div>
+            <div class="col-md-6" style="padding-top:3%">
+                <h2 style='padding-top:1%'>Title: {{song.name}}</h2>
+                <h5 style='padding-top:1%'>Catagory: {{song.tags}}</h5>
+                <h5 style='padding-top:1%'>Movie: {{song.movie}}</h5>
+                <h5 style='padding-top:1%'>Singer: {{song.singer}}</h5>
+                <h5 style='padding-top:1%'>Singer: {{song.singer}}</h5>
+                <h5 style='padding-top:1%'>Credit: <a href="{{song.credit}}" target='blank_'>Click hear</a></h5>
+
+                <audio controls preload="auto" loop>
+                    <source src="{% static song.song %}" srcset="">
+                </audio>
+
+                <div style="padding-top:2%">
+                    <button type='submit' class="btn btn-outline-danger">Favourite❤️</button></a>
+                    <a href="{% static song.song %}" Download><button class="btn btn-outline-danger">Download Song</button></a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+{% endblock content %}

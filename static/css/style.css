@@ -1,0 +1,12 @@
+@media (min-width: 992px) {
+    .offcanvas {
+      width: 50vw !important;
+    }
+  }
+
+  .offcanvas {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  
