@@ -2,9 +2,14 @@
 {% load static %}
 
 {% block title %}Signup{% endblock title %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/signup.css" %}">
+{% endblock css %}
 
 {% block content %}
-    <div class="container my-4">
+<div class="main-content">
+    <div class="bg-image"></div>
+    <div class="container my-4 rounded  d-block p-3">
         <form class="row g-3" method="POST" action="" >{% csrf_token %}
             <div class="col-md-4">
                 <label for="validationDefault01" class="form-label">First name</label>
@@ -45,5 +50,8 @@
                 <button  class="btn btn-primary" type="submit" name='submit-btn' id="submit-button">Sign up</button>
             </div>
         </form>
+        <p style="text-align:end " class="fw-semibold"><a href="{% url "login" %}" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Already have an account</a></p>
+
     </div>
+</div>
 {% endblock content %}

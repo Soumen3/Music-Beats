@@ -49,6 +49,10 @@ def signup(request):
                     messages.error(request, "Username already exists")
                 elif User.objects.filter(email=email).exists():
                     messages.error(request, "Email already registered")
+                elif len(password1)<8:
+                    messages.error(request, "Password must be more than 8 characters")
+                elif len(password1)>20:
+                    messages.error(request, "Password must be less than 20 characters")
                 else:
                     user = User(username=username, email=email)
                     user.first_name = first_name
