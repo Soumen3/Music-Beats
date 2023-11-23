@@ -129,3 +129,12 @@ def history(request):
     history_obj=History.objects.filter(user=request.user).all()
     context['hist_objs']=history_obj
     return render(request, 'history.html', context)
+
+def search_song(request):
+    context={}
+    query=request.GET['search-field']
+    context['query']=query
+    songs_obj=Song.objects.all()
+    query_songs=songs_obj.filter(name__icontains=query)
+    context['query_songs']=query_songs
+    return render(request, 'search_result.html', context)

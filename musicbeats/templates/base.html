@@ -36,7 +36,7 @@
                 </li>
               {% endif %}
             </ul>
-            <form class="d-flex" role="search">
+            <form class="d-flex" role="search" method='get' action="{% url "search" %}">
                 <input class="form-control me-2" name="search-field" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
@@ -50,7 +50,14 @@
                         <li><a class="dropdown-item" href="{% url "fav" %}">Favourites</a></li>
                         <li><a class="dropdown-item" href="{% url "history" %}">History</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" id="logout-btn" href="{% url "logout" %}">Logout</a></li>
+                        <li><button class="btn btn-danger dropdown-item"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                            Logout
+                          </button></li>
+
+                        <p>
+                            
+                        </p>
+                          
                         </ul>
                     </div>
             {% endif %}
@@ -58,9 +65,23 @@
           </div>
         </div>
     </nav>
-
-
     
+
+    <div class="logout-msg">
+        <div class="collapse collapse-horizontal" id="collapseWidthExample">
+          <div class="card card-body" style="width: 300px;">
+            <p class='text-center fs-6 fw-medium'>Are you sure you want to log out?</p>
+            <a id="logout-btn" href="{% url "logout" %}" class="btn btn-danger " style='width:100%'>
+                Yes
+            </a>
+            <button class="btn btn-primary mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+               No
+            </button>
+          </div>
+        </div>
+    </div>
+
+
     {% if messages %}
 
     <div class="notification {{message.tags}}" id="message-box">
