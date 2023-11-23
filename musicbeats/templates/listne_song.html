@@ -14,19 +14,21 @@
                 <h5 style='padding-top:1%'>Catagory: {{song.tags}}</h5>
                 <h5 style='padding-top:1%'>Movie: {{song.movie}}</h5>
                 <h5 style='padding-top:1%'>Singer: {{song.singer}}</h5>
-                <h5 style='padding-top:1%'>Singer: {{song.singer}}</h5>
                 <h5 style='padding-top:1%'>Credit: <a href="{{song.credit}}" target='blank_'>Click hear</a></h5>
 
                 <audio controls preload="auto" loop>
                     <source src="{% static song.song %}" srcset="">
-                </audio>
+                </audio> 
 
                 <div style="padding-top:2%">
-                    <button type='submit' class="btn btn-outline-danger">Favourite❤️</button></a>
-                    <a href="{% static song.song %}" Download><button class="btn btn-outline-danger">Download Song</button></a>
+                    <form action="" method="post">{% csrf_token %}
+                        <input type="hidden" name="song_id" value="{{song}}"/>
+                        <button type='submit' class="btn btn-outline-danger">Favourite❤️</button>
+                    </form>
+                    <a href="{% static song.song %}" Download><button class="btn btn-outline-danger"  style="margin-top: 2%;">Download Song</button></a>
                 </div>
                 
             </div>
         </div>
     </div>
-{% endblock content %}
+{% endblock content %}S

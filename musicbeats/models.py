@@ -10,7 +10,7 @@ class Song(models.Model):
     image= models.ImageField(upload_to="Documents/images")
     song= models.FileField(upload_to="Documents/songs")
     movie=models.CharField( max_length=100, default='unknown')
-    credit=models.CharField( max_length=5000, default='', null=True)
+    credit=models.CharField( max_length=5000, null=True)
 
     def __str__(self):
         return self.name

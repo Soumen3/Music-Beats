@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Song
+from .models import Song, Favourite
 
 
 
@@ -86,6 +86,13 @@ def songs(request):
 @login_required(login_url='login')
 def play_song(request, song_id):
     song=Song.objects.filter(song_id=song_id).first()
+    if request.method=='POST':
+        user=request.user
+        fav_song=Favourite(user=user, song=song)
+        fav_song.save()
+        messages.success(request, "Song added to favourites")
+        # return redirect('listne_song', song.song_id)
+    
     context={}
     context['song']=song
     return render (request, 'listne_song.html', context)
