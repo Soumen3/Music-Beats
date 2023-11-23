@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Music Beats{% endblock title %}
+{% block title %}{{query}}{% endblock title %}
 
 {% block content %}
-    <div class="container mt-3">
-        {% for song in songs reversed %}
+    <div class="container mt-2">
+
+        <div class="py-3 text-center">
+            Your search result for: {{query}}
+        </div>
+        {% if query_songs|length < 1 %}
+            <small class="d-block">No item found</small>
+        {% endif %}
+        {% for song in query_songs reversed %}
         <div class="card mb-3" style="max-width: 940px; padding-top:2%; padding-bottom:2%; padding-left:1%">
             <div class="row g-0">
             <div class="col-md-4">

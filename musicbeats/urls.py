@@ -9,5 +9,5 @@ urlpatterns = [
     path('songs/<int:song_id>/', views.play_song, name='listne_song'),
     path('songs/favourite/', views.favourite, name='fav'),
     path('songs/history/', views.history, name='history'),
-
+    path('songs/search/',views.search_song, name='search')
 ]
