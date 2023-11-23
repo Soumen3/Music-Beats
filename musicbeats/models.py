@@ -22,3 +22,7 @@ class Favourite(models.Model):
     song = models.ForeignKey(Song, on_delete=models.CASCADE, default='')
     
     
+class History(models.Model):
+    History_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    song = models.ForeignKey(Song, on_delete=models.CASCADE, default='')

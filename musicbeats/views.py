@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Song, Favourite
+from .models import Song, Favourite, History
 
 
 
@@ -24,13 +24,14 @@ def login_user(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                messages.success(request, "Login successfull")
                 return redirect('home')
             else:
                 messages.info(request, 'Username OR password is incorrect')
                 return render(request, 'login.html', context)
         return render(request, 'login.html',context)
     else:
-        messages.info(request, "you are already logged in.")
+        messages.info(request, "You are already logged in.")
         return redirect('home')
 
 def signup(request):
@@ -92,18 +93,39 @@ def play_song(request, song_id):
         if Favourite.objects.filter(user=user, song=song).exists():
             delete_fav=Favourite.objects.filter(user=user, song=song)
             delete_fav.delete()
-            messages.info(request, "remove from favourites")
+            messages.info(request, "Remove from favourites")
         else:
             fav_song.save()
             messages.success(request, "Song added to favourites")
             # return redirect('listne_song', song.song_id)
     
+    ## Add to history ##
+    user=request.user
+    hist_song=History(user=user, song=song)
+    if History.objects.filter(user=user, song=song).exists():
+        delete_hist=History.objects.filter(user=user, song=song)
+        delete_hist.delete()
+        hist_song.save()
+    else:
+        hist_song.save()
+
+        
     context={}
     context['song']=song
     return render (request, 'listne_song.html', context)
 
+
+@login_required(login_url='login')
 def favourite(request):
     context={}
     favourite_obj=Favourite.objects.filter(user=request.user).all()
     context['fav_objs']=favourite_obj
     return render(request, 'favourite.html', context)
+
+
+@login_required(login_url='login')
+def history(request):
+    context={}
+    history_obj=History.objects.filter(user=request.user).all()
+    context['hist_objs']=history_obj
+    return render(request, 'history.html', context)

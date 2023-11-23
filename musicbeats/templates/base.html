@@ -48,6 +48,7 @@
                         </button>
                         <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url "fav" %}">Favourites</a></li>
+                        <li><a class="dropdown-item" href="{% url "history" %}">History</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" id="logout-btn" href="{% url "logout" %}">Logout</a></li>
                         </ul>
@@ -62,7 +63,7 @@
     
     {% if messages %}
 
-    <div class="notification" id="message-box">
+    <div class="notification {{message.tags}}" id="message-box">
         <div id="text-message" class="message">
             {% for message in messages %}
                 <span {% if message.tags %} class="{{message.tags}}" {% endif %} >{{message}}</span><br>
