@@ -23,7 +23,7 @@
                 <div style="padding-top:2%">
                     <form action="" method="post">{% csrf_token %}
                         <input type="hidden" name="song_id" value="{{song}}"/>
-                        <button type='submit' class="btn btn-outline-danger">Favourite❤️</button>
+                        <button type='submit' class="btn btn-outline-danger" id="#favorite-button">Favourite❤️</button>
                     </form>
                     <a href="{% static song.song %}" Download><button class="btn btn-outline-danger"  style="margin-top: 2%;">Download Song</button></a>
                 </div>
@@ -31,4 +31,9 @@
             </div>
         </div>
     </div>
-{% endblock content %}S
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static "js/listne_song.js" %}"></script>
+{% endblock js %}
+
