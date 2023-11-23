@@ -89,11 +89,21 @@ def play_song(request, song_id):
     if request.method=='POST':
         user=request.user
         fav_song=Favourite(user=user, song=song)
-        fav_song.save()
-        messages.success(request, "Song added to favourites")
-        # return redirect('listne_song', song.song_id)
+        if Favourite.objects.filter(user=user, song=song).exists():
+            delete_fav=Favourite.objects.filter(user=user, song=song)
+            delete_fav.delete()
+            messages.info(request, "remove from favourites")
+        else:
+            fav_song.save()
+            messages.success(request, "Song added to favourites")
+            # return redirect('listne_song', song.song_id)
     
     context={}
     context['song']=song
     return render (request, 'listne_song.html', context)
 
+def favourite(request):
+    context={}
+    favourite_obj=Favourite.objects.filter(user=request.user).all()
+    context['fav_objs']=favourite_obj
+    return render(request, 'favourite.html', context)

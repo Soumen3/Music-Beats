@@ -4,6 +4,32 @@
 {% block title %}Favourites{% endblock title %}
 
 {% block content %}
-
+    <h1 style="color:#2193b2;" class="text-center">Favourite</h1>
+    <div class="container" >
+        {% if fav_objs|length < 1 %}
+            <h4 class='text-center'>No song found</h4>
+            <a href="{% url "songs" %}" class='text-center'>Add songs</a>
+        {% endif %}
+        {% for fav_obj in fav_objs reversed %}
+        {{song}}
+        <div class="card mb-3" style="max-width: 940px; padding-top:2%; padding-bottom:2%; padding-left:1%">
+            <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{% static fav_obj.song.image %}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title" style="color:#c05d77">{{fav_obj.song.name}}</h5>
+                    <h6>Catagory: {{fav_obj.song.tags}}</h6>
+                    <h6>Movie: {{fav_obj.song.movie}}</h6>
+                    <h6>Singer: {{fav_obj.song.singer}}</h6>
+                    <p class="card-text">{{fav_obj..song.tags}}</p>
+                    <a href="{% url "listne_song" fav_obj.song.song_id %}"><button class="btn btn-outline-danger">Listne Song</button></a>
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock content %}
 
